@@ -159,8 +159,63 @@ function insertarCalificacionProyecto(idProyecto) {
     }
   })
 }
-
 //calificacion proyecto
+
+//recuperar contraseñas
+$(document).ready(function(){
+  $('#recuperarPassPadre').on("submit", function(event){
+  event.preventDefault();
+    $.ajax({
+      url:"drivers/driverPassword.php",
+      method:"POST",
+      data:$('#recuperarPassPadre').serialize(),
+      success:function(data){
+        $('#recuperarPassPadre')[0].reset();
+        $('#mensajePadre').html(data);
+        setTimeout(function(){
+          window.location.href = "../index.php";
+        }, 3000);
+      }
+    });
+  });
+});
+
+$(document).ready(function(){
+  $('#recuperarPassDoc').on("submit", function(event){
+  event.preventDefault();
+    $.ajax({
+      url:"drivers/driverPassword.php",
+      method:"POST",
+      data:$('#recuperarPassDoc').serialize(),
+      success:function(data){
+        $('#recuperarPassDoc')[0].reset();
+        $('#mensajeDoc').html(data);
+        setTimeout(function(){
+          window.location.href = "../index.php";
+        }, 3000);
+      }
+    });
+  });
+});
+
+$(document).ready(function(){
+  $('#recuperarPassAlumno').on("submit", function(event){
+  event.preventDefault();
+    $.ajax({
+      url:"drivers/driverPassword.php",
+      method:"POST",
+      data:$('#recuperarPassAlumno').serialize(),
+      success:function(data){
+        $('#recuperarPassAlumno')[0].reset();
+        $('#mensajeAlumno').html(data);
+        setTimeout(function(){
+          window.location.href = "../index.php";
+        }, 3000);
+      }
+    });
+  });
+});
+//recuperar contraseñas
 
 //buscar docente para darle de baja
 function buscarDocente() {

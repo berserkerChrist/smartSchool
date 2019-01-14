@@ -454,7 +454,14 @@
                       <label for="pwd">Contraseña:</label>
                       <input type="password" class="form-control" name="passwordLogPadre" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                    <div class="form-row">
+                      <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                      </div>
+                      <div class="col-md-6">
+                        <a href="src/passwordPadre.html" class="float-right">Recuperar mi contraseña</a>
+                      </div>
+                    </div>
                   </form>
                 </div>
                 <div id="profesor" class="container tab-pane">
@@ -467,7 +474,14 @@
                       <label for="pwd">Contraseña:</label>
                       <input type="password" class="form-control" name="passwordLogDocente" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                    <div class="form-row">
+                      <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                      </div>
+                      <div class="col-md-6">
+                        <a href="src/passwordDoc.html" class="float-right">Recuperar mi contraseña</a>
+                      </div>
+                    </div>
                   </form>
                 </div>
                 <div id="alumno" class="container tab-pane">
@@ -480,7 +494,14 @@
                       <label for="pwd">Contraseña:</label>
                       <input type="password" class="form-control" name="passwordLogAlumno" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                    <div class="form-row">
+                      <div class="col-md-6">
+                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+                      </div>
+                      <div class="col-md-6">
+                        <a href="src/passwordAlumno.html" class="float-right">Recuperar mi contraseña</a>
+                      </div>
+                    </div>
                   </form>
                 </div>
               </div>
