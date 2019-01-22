@@ -5,8 +5,6 @@
     header("Location: index.php");
   }
 
-
-
  ?>
 
   <!DOCTYPE html>
@@ -141,6 +139,30 @@
                   <canvas id="bar-chart" width="800" height="450"></canvas>
                 </div>
                 <div id="graficas" class="container tab-pane">
+                  <form id="datosGraficas" method="post">
+                    <div class="form-row">
+                      <div class="col-md-5">
+                        <select class="form-control" id="periodoGraficas" required>
+                          <option value="">Selecciona el periodo de evaluación</option>
+                          <?php
+                            include('src/conexion_bd.php');
+                            $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
+                            $resultado = mysqli_query($con, $sql);
+                            while ($fila = mysqli_fetch_array($resultado)) {
+                              echo "<option value=".$fila['id'].">".$fila['periodo']."</option>";
+                            }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="col-md-5">
+                        <select class="form-control" id="materiaGraficas" required>
+                          <option value="">Selecciona una materia</option>
+                        </select>
+                      </div>
+                      <div class="col-md-2" id="generarGraficas"></div>
+                    </div>
+                  </form>
+                  <br>
                   <canvas id="line-chart" width="800" height="450"></canvas>
                 </div>
               </div>

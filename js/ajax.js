@@ -5,7 +5,6 @@ function cerrarMsg() {
         })
     })
 }
-
 //subir excel
 $(document).ready(function(){
       $('#excelPlaneacion').change(function(){
@@ -19,6 +18,9 @@ $(document).ready(function(){
                 data:new FormData(this),
                 contentType:false,
                 processData:false,
+                beforeSend:function(){
+                     $('#result').html("Espera un momento...");
+                },
                 success:function(data){
                      $('#result').html(data);
                      $('#excelPlaneacion').val('');
@@ -46,15 +48,46 @@ $(document).ready(function(){
 });
 //select para alumnos
 
-//select para calificacion actividades
+//select para materias de periodo
+$(document).ready(function(){
+  $('#periodoGraficas').change(function(){
+      var periodoGraficas = $(this).val();
+      $.ajax({
+        type: "POST",
+        url: "src/select.php",
+        data: {periodoGraficas:periodoGraficas},
+        success: function(resp) {
+            if(resp != "") {
+                $('#materiaGraficas').html(resp); //Muestra la consulta en el div con el id="ver-buscar"
+            }
+        }
+      });
+  });
+});
+//select para materias de periodo
+
+//CALIFICACION DE ACTIVIDADES{
 $(document).ready(function(){
   $('#selectMateria').change(function(){
-      var selectPeriodo = $('#selectPeriodo').val();
-      var materia = $(this).val();
+      var materiaCalActividades = $(this).val();
+      $.ajax({
+        type: "POST",
+        url: "src/select.php",
+        data: {materiaCalActividades:materiaCalActividades},
+        success: function(resp) {
+            if(resp != "") {
+                $('#selectActividadCal').html(resp); //Muestra la consulta en el div con el id="ver-buscar"
+            }
+        }
+      });
+  });
+});
+$(document).ready(function(){
+  $('#selectActividadCal').change(function(){
       $.ajax({
         type: "POST",
         url: "src/drivers/driverCalActividades.php",
-        data: {periodo:selectPeriodo, materia:materia},
+        data: {},
         success: function(resp) {
             if(resp != "") {
                 $('#formCalificacionesAct').html(resp); //Muestra la consulta en el div con el id="ver-buscar"
@@ -65,35 +98,47 @@ $(document).ready(function(){
       });
   });
 });
-//select para calificacion actividades
-function insertarCalificacion(idAct) {
-  var alumno = $('#selectAlumno').val();
-  var calificacion = $('#'+idAct+'cal').val();
-  var materia = $('#'+idAct+'materia').val();
-  var periodo = $('#'+idAct+'periodo').val();
+function insertarCalificacion(idAlumno) {
+    var calificacion = $('#'+idAlumno+'cal').val();
+    var materia = $('#selectMateria').val();
+    var periodo = $('#selectPeriodo').val();
+    var actividad = $('#selectActividadCal').val();
 
-  $.ajax({
-
-    url: 'src/insertCalificacionActividades.php',
-    method: 'POST',
-    data: {id:idAct, alumno:alumno, calificacion:calificacion, materiaCalActividades:materia, periodoCalActividades:periodo},
-    success: function (resp){
-      if(resp != "") {
-          $('#captura').html(resp); //Muestra la consulta en el div con el id="verDivStock"
+    $.ajax({
+      url: 'src/insertCalificacionActividades.php',
+      method: 'POST',
+      data: {actividad:actividad, alumno:idAlumno, calificacion:calificacion, materiaCalActividades:materia, periodoCalActividades:periodo},
+      success: function (resp){
+        if(resp != "") {
+            $('#captura').html(resp); //Muestra la consulta en el div con el id="verDivStock"
+        }
       }
-    }
-  })
-}
+    })
+  }
+//CALIFICACION DE ACTIVIDADES}
 
-//select para calificacion tareas
+//CALIFICACION DE TAREAS{
 $(document).ready(function(){
   $('#selectMateriaTareas').change(function(){
-      var selectPeriodoTareas = $('#selectPeriodoTareas').val();
-      var materiaTareas = $(this).val();
+    var materiaCalTareas = $(this).val();
+    $.ajax({
+      type: "POST",
+      url: "src/select.php",
+      data: {materiaCalTareas:materiaCalTareas},
+      success: function(resp) {
+          if(resp != "") {
+              $('#selectTareaCal').html(resp); //Muestra la consulta en el div con el id="ver-buscar"
+          }
+      }
+    });
+  });
+});
+$(document).ready(function(){
+  $('#selectTareaCal').change(function(){
       $.ajax({
         type: "POST",
         url: "src/drivers/driverCalTareas.php",
-        data: {periodoTareas:selectPeriodoTareas, materia:materiaTareas},
+        data: {},
         success: function(resp) {
             if(resp != "") {
                 $('#formCalificacionesTareas').html(resp); //Muestra la consulta en el div con el id="ver-buscar"
@@ -104,18 +149,16 @@ $(document).ready(function(){
       });
   });
 });
-//select para calificacion tareas
-function insertarCalificacionTareas(idTarea) {
-  var alumno = $('#selectAlumnoTareas').val();
-  var calificacion = $('#'+idTarea+'cal').val();
-  var periodo = $('#'+idTarea+'periodo').val();
-  var materia = $('#'+idTarea+'materia').val();
+function insertarCalificacionTareas(idAlumno) {
+  var calificacion = $('#'+idAlumno+'cal').val();
+  var periodo = $('#selectPeriodoTareas').val();
+  var materia = $('#selectMateriaTareas').val();
+  var tarea = $('#selectTareaCal').val();
 
   $.ajax({
-
     url: 'src/insertCalificacionTareas.php',
     method: 'POST',
-    data: {id:idTarea, alumno:alumno, calificacion:calificacion, periodoCalTarea:periodo, materiaCalTarea:materia},
+    data: {tarea:tarea, alumno:idAlumno, calificacion:calificacion, periodoCalTarea:periodo, materiaCalTarea:materia},
     success: function (resp){
       if(resp != "") {
           $('#capturaTarea').html(resp); //Muestra la consulta en el div con el id="verDivStock"
@@ -123,8 +166,54 @@ function insertarCalificacionTareas(idTarea) {
     }
   })
 }
+//CALIFICACION DE TAREAS}
 
-//select para calificacion proyecto
+//Calificacon PE
+$(document).ready(function(){
+  $('#selectMateriaParEx').change(function(){
+    $.ajax({
+      url:"src/drivers/driverCalPE.php",
+      method: "POST",
+      success:function(data){
+        if(data != "") {
+            $('#formCalificacionesPE').html(data); //Muestra la consulta en el div con el id="ver-buscar"
+        }else {
+          $('#formCalificacionesPE').html(' ');
+        }
+      }
+    });
+  });
+});
+function  insertarCalificacionPE(idAlumno){
+  if ($('#'+idAlumno+'calEx').val() != "" && $('#'+idAlumno+'calPar').val() != "") {
+
+    var calExamen = $('#'+idAlumno+'calEx').val();
+    var calParticipacion = $('#'+idAlumno+'calPar').val();
+    var materia = $('#selectMateriaParEx').val();
+    var periodo = $('#selectPeriodoParEx').val();
+
+    $.ajax({
+      url:"src/insertCalificacionPE.php",
+      method: "POST",
+      data:{alumno:idAlumno, calExamen:calExamen, calParticipacion:calParticipacion, materia:materia, periodo:periodo},
+      success: function(data){
+        if (data != "") {
+          var html = '<div class="alert alert-success" role="alert"><strong>Calificación capturada con exito</strong></div>';
+          $('#msjParEx').html(html);
+        } else {
+          var html = '<div class="alert alert-danger" role="alert"><strong>¡Oh no! ha ocurrido un error, intentalo de nuevo D:</strong></div>';
+          $('#msjParEx').html(html);
+        }
+      }
+    });
+
+  }else {
+    alert("Por favor llena ambos campos de: "+idAlumno);
+  }
+}
+//Calificacon PE
+
+//calificacion proyecto
 $(document).ready(function(){
   $('#selectPeriodoProyecto').change(function(){
       var selectPeriodoProyecto = $(this).val();
@@ -142,7 +231,6 @@ $(document).ready(function(){
       });
   });
 });
-//select para calificacion proyecto
 function insertarCalificacionProyecto(idProyecto) {
   var calificacion = $('#'+idProyecto+'calProyecto').val();
   var idAlumno = $('#'+idProyecto+'Nombre').val();
@@ -160,6 +248,48 @@ function insertarCalificacionProyecto(idProyecto) {
   })
 }
 //calificacion proyecto
+
+//PROMEDIOS
+$(document).ready(function(){
+  $('#generarPromedios').click(function(){
+    if ($('#selectPeriodoPromedios').val() != "" && $('#pondTareas').val() != "" && $('#pondActividades').val() != "" && $('#pondExamen').val() != "" && $('#pondParticipaciones').val() != "") {
+
+      var pondAct = parseInt($('#pondActividades').val());
+      var pondTar = parseInt($('#pondTareas').val());
+      var pondEx = parseInt($('#pondExamen').val());
+      var pondPar = parseInt($('#pondParticipaciones').val());
+      var suma = pondTar + pondEx + pondPar + pondAct;
+
+      if (suma != 100) {
+        alert("Los porcentajes son incorrectos! La suma es diferente de 100");
+      }
+      else {
+        var periodo = $('#selectPeriodoPromedios').val();
+        $.ajax({
+          url:"src/drivers/datos/promedios.php",
+          method: "POST",
+          data:{periodoProm: periodo, pondAct:pondAct, pondTar: pondTar, pondPar: pondPar, pondEx:pondEx},
+          beforeSend: function(){
+            var html = '<div class="alert alert-info" role="alert"><strong>¡Estamos generando los promedios! :D esto puede tardar unos segundos</strong></div>';
+            $('#msjPromedios').html(html);
+          },
+          success: function(data) {
+            if (data != "") {
+              var html = '<div class="alert alert-success" role="alert"><strong>¡Los promedios se han generado con exito! :D</strong></div>';
+              $('#msjPromedios').html(html);
+            } else {
+              var html = '<div class="alert alert-danger" role="alert"><strong>¡Oh no! ha ocurrido un error mientras se generaban los promedios, intentalo de nuevo D:</strong></div>';
+              $('#msjPromedios').html(html);
+            }
+          }
+        });
+      }
+    } else {
+      alert("Por favor llena todos los campos para generar los promedios");
+    }
+  });
+});
+//PROMEDIOS
 
 //recuperar contraseñas
 $(document).ready(function(){

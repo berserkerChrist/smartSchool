@@ -1,43 +1,45 @@
+//datos de graficas
 $(document).ready(function(){
+  $('#materiaGraficas').change(function(){
+    var periodoGraficas = $('#periodoGraficas').val();
+    var materiaGraficas = $(this).val();
 
-  new Chart(document.getElementById("line-chart"), {
-  type: 'line',
-  data: {
-    labels: ["Actividad 1", "Actividad 2", "Actividad 3", "Actividad 4", "Actividad 5"],
-    datasets: [{
-        data: [8,7,10,10,8,12],
-        label: "Español",
-        borderColor: "#3e95cd",
-        fill: false
-      }, {
-        data: [10,10,10,9,10,12],
-        label: "Matematicas",
-        borderColor: "#8e5ea2",
-        fill: false
-      }, {
-        data: [9,9,10,10,10,12],
-        label: "Geografia",
-        borderColor: "#3cba9f",
-        fill: false
-      }, {
-        data: [4,7,5,6,5,12],
-        label: "Historia",
-        borderColor: "#e8c3b9",
-        fill: false
-      }, {
-        data: [9,10,9,10,9,12],
-        label: "Ciencias naturales",
-        borderColor: "#c45850",
-        fill: false
+    $.ajax({
+      url:"src/drivers/datos/graficas.php",
+      method:"POST",
+      data: {periodoGraficas: periodoGraficas, materiaGraficas:materiaGraficas},
+      success: function(data){
+          console.log(data);
+          var actividades = [];
+          var calificaciones = [];
+          var json = JSON.parse(data);
+          var descripcion = [];
+
+          for (var i in json){
+            calificaciones.push(json[i].calificacion);
+            actividades.push(json[i].titulo);
+          }
+
+          var datosGrafica = {
+            labels: actividades,
+            datasets: [{
+                    label: "Actividades del periodo de evaluacion",
+                    fill: false,
+                    lineTension: 0.1,
+                    backgroundColor: '#ff0000',
+                    borderColor: '#ffbbbb',
+                    hoverBackgroundColor: '#CCCCCC',
+                    hoverBorderColor: '#666666',
+                    data: calificaciones
+                }],
+          };
+          var grafica = $("#line-chart");
+          var linechart = new Chart(grafica, {
+              type: 'line',
+              data: datosGrafica
+          });
       }
-    ]
-  },
-  options: {
-    title: {
-      display: true,
-      text: 'Rendiemiento por materia a lo largo del trimestre'
-    }
-  }
+    });
+  });
 });
-
-});
+//datos de graficas

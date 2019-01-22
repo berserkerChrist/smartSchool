@@ -1,4 +1,5 @@
 <?php
+  include('src/conexion_bd.php');
   session_start();
   $grupo = $_SESSION['grupoDocente'];
   if(!$_SESSION){
@@ -65,7 +66,7 @@
             </a>
             <ul class="collapse list-unstyled" id="AdminSubmenu">
               <li>
-                <a href="#" onclick="toggleVisibility('promedio')">Promedios</a>
+                <a href="#" onclick="toggleVisibility('promedio')">Capturar calificaciones</a>
               </li>
               <li>
                 <a href="#" onclick="toggleVisibility('proyecto')">Proyecto</a>
@@ -145,7 +146,7 @@
                   <div class="col-md-9">
                     <select class="form-control" name="actividad">
                       <?php
-                        include('src/conexion_bd.php');
+
                         $sql = "SELECT * FROM actividades WHERE status = '300' AND grupo_fk = '".$grupo."' ORDER BY id DESC";
                         $resultado = mysqli_query($con, $sql);
                         while($fila = mysqli_fetch_array($resultado)){
@@ -309,7 +310,13 @@
                   <a class="nav-link active" data-toggle="tab" href="#tab1">Actividades</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#tab2">Tareas y examen</a>
+                  <a class="nav-link" data-toggle="tab" href="#tab2">Tareas</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#tab3">Examen y participaciones</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#tab4">Promedios</a>
                 </li>
               </ul>
             </div>
@@ -318,19 +325,6 @@
                 <div class="tab-pane active" id="tab1">
                   <form id="formularioCalAct" method="post">
                     <div class="row">
-                      <div class="col-md-4">
-                        <label for="alumno">Alumno:</label>
-                        <select class="form-control" name="alumno" id="selectAlumno" required>
-                          <option value="">Selecciona un alumno a calificar</option>
-                          <?php
-                            $sql = "SELECT * FROM alumno WHERE grupo_fk = '".$grupo."'";
-                            $resultado = mysqli_query($con, $sql);
-                            while($fila = mysqli_fetch_array($resultado)){
-                              echo "<option value=".$fila['nickname'].">".$fila['ap_paterno']." ".$fila['ap_materno']." ".$fila['nombre']."</option>";
-                            }
-                          ?>
-                        </select>
-                      </div>
                       <div class="col-md-4">
                         <label for="periodo">Periodo:</label>
                         <select class="form-control" name="periodo" id="selectPeriodo" required>
@@ -349,12 +343,18 @@
                         <select class="form-control" name="materia" id="selectMateria" required>
                           <option value="">Selecciona la materia</option>
                           <?php
-                          $sql = "SELECT * FROM materia";
-                          $resultado = mysqli_query($con, $sql);
-                          while ($fila = mysqli_fetch_array($resultado)) {
+                            $sql = "SELECT * FROM materia";
+                            $resultado = mysqli_query($con, $sql);
+                            while ($fila = mysqli_fetch_array($resultado)) {
                             echo "<option value=".$fila['id'].">".$fila['nombre']."</option>";
                           }
                         ?>
+                        </select>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="">Actividad a calificar:</label>
+                        <select class="form-control" name="actividad" id="selectActividadCal">
+
                         </select>
                       </div>
                     </div>
@@ -368,19 +368,6 @@
                 <div class="tab-pane " id="tab2">
                   <form id="formularioCalTareas" method="post">
                     <div class="row">
-                      <div class="col-md-4">
-                        <label for="alumno">Alumno:</label>
-                        <select class="form-control" name="alumnoTareas" id="selectAlumnoTareas" required>
-                          <option value="">Selecciona un alumno a calificar</option>
-                          <?php
-                            $sql = "SELECT * FROM alumno WHERE grupo_fk = '".$grupo."'";
-                            $resultado = mysqli_query($con, $sql);
-                            while($fila = mysqli_fetch_array($resultado)){
-                              echo "<option value=".$fila['nickname'].">".$fila['ap_paterno']." ".$fila['ap_materno']." ".$fila['nombre']."</option>";
-                            }
-                          ?>
-                        </select>
-                      </div>
                       <div class="col-md-4">
                         <label for="periodo">Periodo:</label>
                         <select class="form-control" name="periodoTareas" id="selectPeriodoTareas" required>
@@ -407,6 +394,12 @@
                         ?>
                         </select>
                       </div>
+                      <div class="col-md-4">
+                        <label for="">Tarea a calificar:</label>
+                        <select class="form-control" name="tareaCal" id="selectTareaCal">
+
+                        </select>
+                      </div>
                     </div>
                     <hr>
                     <div id="formCalificacionesTareas"></div>
@@ -414,6 +407,84 @@
                     <div id="capturaTarea">
                     </div>
                   </form>
+                </div>
+                <div class="tab-pane" id="tab3">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="periodo">Periodo:</label>
+                      <select class="form-control" name="periodoTareas" id="selectPeriodoParEx" required>
+                        <option value="">Selecciona un periodo de evaluacion</option>
+                        <?php
+                        $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
+                        $resultado = mysqli_query($con, $sql);
+                        while ($fila = mysqli_fetch_array($resultado)) {
+                          echo "<option value=".$fila['id'].">".$fila['periodo']."</option>";
+                        }
+                      ?>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="periodo">Materia:</label>
+                      <select class="form-control" name="materiaTareas" id="selectMateriaParEx" required>
+                        <option value="">Selecciona la materia</option>
+                        <?php
+                        $sql = "SELECT * FROM materia";
+                        $resultado = mysqli_query($con, $sql);
+                        while ($fila = mysqli_fetch_array($resultado)) {
+                          echo "<option value=".$fila['id'].">".$fila['nombre']."</option>";
+                        }
+                      ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div id="formCalificacionesPE" method="post"></div>
+                  <br>
+                  <div id="msjParEx"></div>
+                </div>
+                <div class="tab-pane" id="tab4">
+                  <h6 class="text-primary">Indica los porcentajes de ponderación</h6>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <label for="">Actividades</label>
+                      <input type="number" id="pondActividades" class="form-control" min="1" max="99">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Tareas</label>
+                      <input type="number" id="pondTareas" class="form-control" min="1" max="99">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Participaciones</label>
+                      <input type="number" id="pondParticipaciones" class="form-control" min="1" max="99">
+                    </div>
+                    <div class="col-md-3">
+                      <label for="">Examen</label>
+                      <input type="number" id="pondExamen" class="form-control" min="1" max="99">
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label for="periodo">Periodo:</label>
+                      <div class="input-group">
+                        <select class="form-control" name="periodoTareas" id="selectPeriodoPromedios" required>
+                          <option value="">Selecciona un periodo de evaluacion</option>
+                          <?php
+                          $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
+                          $resultado = mysqli_query($con, $sql);
+                          while ($fila = mysqli_fetch_array($resultado)) {
+                            echo "<option value=".$fila['id'].">".$fila['periodo']."</option>";
+                          }
+                        ?>
+                        </select>
+                        <div class="input-group-append">
+                          <button type="button" class="btn btn-primary" id="generarPromedios">Generar promedios</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div id="msjPromedios"></div>
                 </div>
               </div>
             </div>
