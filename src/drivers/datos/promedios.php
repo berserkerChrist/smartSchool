@@ -22,7 +22,7 @@
       $calificacionTarEsp = getPromedioTareas($alumno, $español, $periodo);
       $examenEsp = getParticipacion($alumno, $español, $periodo);
       $participacionesEsp = getExamen($alumno, $español, $periodo);
-      generarPromedioGeneral($alumno, $español, $calificacionTarEsp, $calificacionActEsp, $examenEsp, $participacionesEsp);
+      generarPromedioGeneral($alumno, $español, $calificacionTarEsp, $calificacionActEsp, $examenEsp, $participacionesEsp, $periodo, $grupo);
       //promedios de español
 
       //promedios de matematicas
@@ -30,6 +30,7 @@
       $calificacionesTarMat = getPromedioTareas($alumno, $matematicas, $periodo);
       $examenMat = getParticipacion($alumno, $matematicas, $periodo);
       $participacionesMat = getExamen($alumno, $matematicas, $periodo);
+      generarPromedioGeneral($alumno, $matematicas, $calificacionTarMat, $calificacionActMat, $examenMat, $participacionesMat, $periodo, $grupo);
       //promedios de matematicas
 
       //promedios de Ciencias Naturales
@@ -37,6 +38,7 @@
       $calificacionesTarCN = getPromedioTareas($alumno, $cienciasNat, $periodo);
       $examenCN = getParticipacion($alumno, $cienciasNat, $periodo);
       $participacionesCN = getExamen($alumno, $cienciasNat, $periodo);
+      generarPromedioGeneral($alumno, $cienciasNat, $calificacionTarCN, $calificacionActCN, $examenCN, $participacionesCN, $periodo, $grupo);
       //promedios de Ciencias Naturales
 
       //promedios de historia
@@ -44,6 +46,7 @@
       $calificacionesTarHist = getPromedioTareas($alumno, $historia, $periodo);
       $examenHist = getParticipacion($alumno, $historia, $periodo);
       $participacionesHist = getExamen($alumno, $historia, $periodo);
+      generarPromedioGeneral($alumno, $historia, $calificacionTarHist, $calificacionActHist, $examenHist, $participacionesHist, $periodo, $grupo);
       //promedios de historia
 
       //promedios de geografia
@@ -51,6 +54,7 @@
       $calificacionesTarGeo = getPromedioTareas($alumno, $geografia, $periodo);
       $examenGeo = getParticipacion($alumno, $geografia, $periodo);
       $participacionesGeo = getExamen($alumno, $geografia, $periodo);
+      generarPromedioGeneral($alumno, $geografia, $calificacionTarGeo, $calificacionActGeo, $examenGeo, $participacionesGeo, $periodo, $grupo);
       //promedios de geografia
 
       //promedios de civica y etica
@@ -58,6 +62,7 @@
       $calificacionesTarCE = getPromedioTareas($alumno, $civEtica, $periodo);
       $examenCE = getParticipacion($alumno, $civEtica, $periodo);
       $participacionesCE = getExamen($alumno, $civEtica, $periodo);
+      generarPromedioGeneral($alumno, $civEtica, $calificacionTarCE, $calificacionActCE, $examenCE, $participacionesCE, $periodo, $grupo);
       //promedios de civica y etica
 
 
@@ -100,7 +105,7 @@
       return $fila['examen'];
     }
 
-    function generarPromedioGeneral($alumno, $materia, $tareas, $actividades, $examen, $particiapciones){
+    function generarPromedioGeneral($alumno, $materia, $tareas, $actividades, $examen, $particiapciones, $periodo, $grupo){
       include('../../conexion_bd.php');
 
         $pondActividades = ($con->real_escape_string($_POST['pondAct']))/100;
@@ -114,7 +119,9 @@
         $calPart = $particiapciones * $pondParticipacion;
 
         $calificacionFinal = $calTareas + $calAct + $calExam + $calPart;
-        echo " $calificacionFinal ";
+        $sql = "INSERT INTO promedios (id_alumno, materia, periodo, calificacion, grupo)
+        VALUES ('$alumno', '$materia', '$periodo', '$calificacionFinal', '$grupo')";
+        $result = mysqli_query($con, $sql);
     }
 
     echo "OK";

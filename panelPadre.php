@@ -136,7 +136,23 @@
             <div class="card-body">
               <div class="tab-content">
                 <div id="promedios" class="container tab-pane active">
-                  <canvas id="bar-chart" width="800" height="450"></canvas>
+                  <div class="row">
+                    <div class="col-md-5">
+                      <select class="form-control" id="periodoGraficasProm" required>
+                        <option value="">Selecciona el periodo de evaluación</option>
+                        <?php
+                          include('src/conexion_bd.php');
+                          $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
+                          $resultado = mysqli_query($con, $sql);
+                          while ($fila = mysqli_fetch_array($resultado)) {
+                            echo "<option value=".$fila['id'].">".$fila['periodo']."</option>";
+                          }
+                        ?>
+                      </select>
+                    </div>
+                    <br>
+                    <canvas id="bar-chart" width="800" height="450"></canvas>
+                  </div>
                 </div>
                 <div id="graficas" class="container tab-pane">
                   <form id="datosGraficas" method="post">
@@ -164,6 +180,8 @@
                   </form>
                   <br>
                   <canvas id="line-chart" width="800" height="450"></canvas>
+                  <br>
+                  <canvas id="line-chartTareas" width="800" height="450"></canvas>
                 </div>
               </div>
             </div>
