@@ -515,13 +515,13 @@ session_start();
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4>Actualizar grupo</h4>
+          <h4>Mover grupo</h4>
         </div>
         <div class="modal-body">
           <form method="post" id="insert_form_grupo">
             <div class="form-row">
               <div class="col-md-6">
-                <label for="">Grupo:</label>
+                <label for="">Grupo anterior:</label>
                 <input type="text" id="grupoAnterior" class="form-control" disabled>
               </div>
               <div class="col-md-6">
@@ -534,6 +534,19 @@ session_start();
               <option value="">Selecciona un status</option>
               <option value="404">Inactivo</option>
             </select>
+            <br>
+            <h6 class="text-primary">Crea el grupo nuevo</h6>
+            <hr>
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="">Grupo:</label>
+                <input type="text" name="nombreNuevoG" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label for="">Ciclo escolar nuevo:</label>
+                <input type="text" name="nuevoCE" class="form-control" required>
+              </div>
+            </div>
             <input type="hidden" name="idAntiguoGrupo" id="idAntiguoGrupo">
             <br>
             <input type="submit" name="insertGr" id="insertGr" class="btn btn-primary" />

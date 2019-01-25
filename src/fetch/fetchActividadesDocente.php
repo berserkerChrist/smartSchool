@@ -2,25 +2,21 @@
   session_start();
   include('../conexion_bd.php');
 
-  $limite = $con -> real_escape_string($_POST['limiteAct']);
-  $inicio = $con -> real_escape_string($_POST['inicioAct']);
-  $alumno = $_SESSION['hijo'];
+  $limite = $con -> real_escape_string($_POST['limiteActAD']);
+  $inicio = $con -> real_escape_string($_POST['inicioActAD']);
+  $grupo = $_SESSION['grupoDocente'];
 
-  $sql = "SELECT * FROM actividades INNER JOIN alumno ON alumno.nickname = '".$alumno."'
-          WHERE actividades.grupo_fk = alumno.grupo_fk AND actividades.status = '200'
-          ORDER BY id DESC LIMIT ".$inicio.", ".$limite."";
+  $sql = "SELECT * FROM actividades WHERE grupo_fk = '".$grupo."' AND status = '200' ORDER BY id DESC LIMIT ".$inicio.", ".$limite."";
 
-  /*$sql2 = "SELECT materia.nombre, tareas.materia, alumno.nickname FROM materia, tareas, alumno
-           WHERE materia.id = tareas.materia AND status = '200' AND alumno.nickname = '".$alumno."'
-           ORDER BY tareas.id DESC";*/
+  //$sql2 = "SELECT materia.nombre, tareas.materia FROM materia, tareas WHERE materia.id = tareas.materia AND status = '200'";
 
   $resultado = mysqli_query($con, $sql);
   //$resultado2 = mysqli_query($con, $sql2);
 
-
   while ($fila = mysqli_fetch_array($resultado)) {
     //$fila2 = mysqli_fetch_array($resultado2);
     echo'
+    <div class="card w-100 mx-auto shadow">
       <div class="card-body">
         <div class="row">
           <div class="col-md-6">

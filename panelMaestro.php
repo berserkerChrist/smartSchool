@@ -46,6 +46,22 @@
 
         <ul class="list-unstyled components">
           <li>
+            <a href="#miGrupoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle ">
+              <i class="far fa-calendar-check fa-lg"></i>Mi grupo
+            </a>
+            <ul class="collapse list-unstyled" id="miGrupoSubmenu">
+              <li>
+                <a href="#" onclick="toggleVisibility('actRealizadas')">Actividades realizadas en clase</a>
+              </li>
+              <li>
+                <a href="#" onclick="toggleVisibility('tareasAsignadas')">Tareas asignadas</a>
+              </li>
+              <li>
+                <a href="#" onclick="toggleVisibility('tareasArchivo')">Tareas a calificar</a>
+              </li>
+            </ul>
+          </li>
+          <li>
             <a href="#" onclick="toggleVisibility('planeacion')" class="">
               <i class="fas fa-file-upload fa-lg"></i>Planeacion
             </a>
@@ -107,8 +123,28 @@
           </ul>
         </nav>
 
+        <div id="actRealizadas" class="espacioTop paddingSides">
+          <div id="hint" class="alert alert-info" role="alert">
+            <strong>En esta seccion puedes echar un vistazo a las actividades que has realizado con tu grupo</strong>
+          </div>
+          <br>
+          <div id="mostrarActividadesDocente"></div>
+          <div id="cargandoActDocente" class="text-center"></div>
+          <br>
+        </div>
+
+        <div id="tareasAsignadas" class="espacioTop paddingSides none">
+          <div id="hintTareas" class="alert alert-info" role="alert">
+            <strong>En esta seccion puedes echar un vistazo a las tareas que has asignado a tu grupo</strong>
+          </div>
+          <br>
+          <div id="mostrarTareasDoc"></div>
+          <div id="cargandoDoc" class="text-center"></div>
+          <br>
+        </div>
+
         <!--planeacion-->
-        <div id="planeacion" class="espacioTop paddingSides">
+        <div id="planeacion" class="espacioTop paddingSides none">
 
           <div class="card w-100 mx-auto shadow">
             <div class="card-header bg-white text-center">
@@ -292,6 +328,13 @@
                   </div>
                 </div>
                 <br>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="archivo">
+                    <label class="form-check-label" for="defaultCheck1">
+                      Marca esta casilla si deseas que el alumno suba un archivo a la plataforma
+                    </label>
+                  </div>
+                <br>
                 <input type="submit" class="btn btn-primary" name="crearTarea" value="Crear">
               </form>
             </div>
@@ -463,7 +506,7 @@
                     </div>
                   </div>
                   <br>
-                  
+
                   <br>
                   <div class="row">
                     <div class="col-md-12">
@@ -717,7 +760,7 @@
       });
 
       //Mostrar la opcion de panel lateral
-      var divs = ["planeacion", "tareas", "actividades", "promedio", "proyecto", "reportes", "calendario"];
+      var divs = ["actRealizadas", "tareasAsignadas", "tareasArchivo", "planeacion", "tareas", "actividades", "promedio", "proyecto", "reportes", "calendario"];
       var visibleDivId = null;
 
       function toggleVisibility(divId) {

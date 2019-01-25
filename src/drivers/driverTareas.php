@@ -12,8 +12,14 @@
     $status = 300;
     $grupo = $_SESSION['grupoDocente'];
 
-    $sql = "INSERT INTO tareas (materia, semana, titulo, descripcion, periodo, fecha_ent, grupo, status)
-    VALUES ('$materia', '$semana', '$titulo', '$descipcion', '$periodo', '$fecha', '$grupo','$status')";
+    if (isset($_POST['archivo'])) {
+      $upload = true;
+    } else {
+      $upload = false;
+    }
+
+    $sql = "INSERT INTO tareas (materia, semana, titulo, descripcion, periodo, fecha_ent, grupo, status, upload)
+    VALUES ('$materia', '$semana', '$titulo', '$descipcion', '$periodo', '$fecha', '$grupo','$status', '$upload')";
 
     $resultado = mysqli_query($con, $sql);
      if($resultado){

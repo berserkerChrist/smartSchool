@@ -590,7 +590,7 @@ $(document).ready(function(){
         $('#idAntiguoGrupo').val(data.id_grupo);
         $('#grupoAnterior').val(data.grupo);
         $('#cicloEscolarAnterior').val(data.ciclo_escolar);
-        $('#insertGr').val("Actualizar");
+        $('#insertGr').val("modificar");
         $('#modalModificarGrupo').modal('show');
       }
     });
@@ -880,7 +880,102 @@ $(document).ready(function() {
       }, 1000);
     }
   });
-
-
 });
 //onScrollalumnoActividades
+
+//onScroll Actividades docente
+$(document).ready(function() {
+
+  var limiteActAD = 12;
+  var inicioActAD = 0;
+  var actionActAD = 'inactive';
+
+  function cargarTareasDocente(limiteActA, inicioActAD) {
+    $.ajax({
+      url: "src/fetch/fetchActividadesDocente.php",
+      type: "POST",
+      data: {
+        limiteActAD: limiteActAD,
+        inicioActAD: inicioActAD
+      },
+      cache: false,
+      success: function(data) {
+        setTimeout(function(){
+          $('#hint').fadeOut("slow");
+        }, 5000);
+        $('#hint').show();
+        $('#mostrarActividadesDocente').append(data);
+        if (data == '') {
+          $('#cargandoActDocente').html("<button type='button' class='btn btn-info'>No hay más actividades :D</button>");
+          actionActAD = 'active';
+        } else {
+          $('#cargandoActDocente').html("<button type='button' class='btn btn-warning'>Espera un momento...</button>");
+          actionActAD = 'inactive';
+        }
+      }
+    });
+  }
+
+  if (actionActAD == 'inactive') {
+    actionActAD = 'active';
+    cargarTareasDocente(limiteActAD, inicioActAD);
+  }
+
+  $(window).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() > $("#mostrarActividadesDocente").height() && actionActAD == 'inactive') {
+      actionActAD = 'active';
+      inicioActAD = inicioActAD + limiteActAD;
+      setTimeout(function() {
+        cargarTareasDocente(limiteActAD, inicioActAD);
+      }, 1000);
+    }
+  });
+});
+//onScroll Actividades docente
+
+//onScroll tareas docente
+$(document).ready(function() {
+
+  var limiteDocTareas = 12;
+  var inicioDocTareas = 0;
+  var action = 'inactive';
+
+  function cargarTareas(limiteDocTareas, inicioDocTareas) {
+    $.ajax({
+      url: "src/fetch/fetchTareasDocente.php",
+      type: "POST",
+      data: {
+        limiteDocTareas: limiteDocTareas,
+        inicioDocTareas: inicioDocTareas
+      },
+      cache: false,
+      success: function(data) {
+
+        $('#mostrarTareasDoc').append(data);
+        if (data == '') {
+          $('#cargandoDoc').html("<button type='button' class='btn btn-info'>No hay más tareas :D</button>");
+          action = 'active';
+        } else {
+          $('#cargandoDoc').html("<button type='button' class='btn btn-warning'>Espera un momento...</button>");
+          action = 'inactive';
+        }
+      }
+    });
+  }
+
+  if (action == 'inactive') {
+    action = 'active';
+    cargarTareas(limiteDocTareas, inicioDocTareas);
+  }
+
+  $(window).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() > $("#mostrarTareasDoc").height() && action == 'inactive') {
+      action = 'active';
+      inicioDocTareas = inicioDocTareas + limiteDocTareas;
+      setTimeout(function() {
+        cargarTareas(limiteDocTareas, inicioDocTareas);
+      }, 1000);
+    }
+  });
+});
+//onScroll tareas docente
