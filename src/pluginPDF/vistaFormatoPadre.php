@@ -30,13 +30,15 @@
     //variables
 
     $son = $_SESSION['hijo'];
-    $sql = "SELECT * FROM alumno WHERE nickname = '".$son."'";
+    $sql = "SELECT alumno.nickname, alumno.nombre,alumno.ap_paterno, alumno.ap_materno, alumno.grupo_fk, grupo.id_grupo, grupo.grupo, grupo.ciclo_escolar FROM alumno
+    INNER JOIN grupo ON alumno.grupo_fk = grupo.id_grupo WHERE alumno.nickname = '".$son."'";
     $resultado = mysqli_query($con, $sql);
     $fila = mysqli_fetch_array($resultado);
     $nombre = $fila['nombre'];
     $apellidoPat = $fila['ap_paterno'];
     $apellidoMat = $fila['ap_materno'];
-    $grupo = $fila['grupo_fk'];
+    $grupo = $fila['grupo'];
+    $CE =  $fila['ciclo_escolar'];
 
   ?>
   <body>
@@ -46,6 +48,7 @@
 
     <h4>Alumno: <?php echo "$nombre $apellidoPat $apellidoMat"; ?></h4>
     <h4>Grupo: <?php echo $grupo ?></h4>
+    <h4>Ciclo escolar: <?php echo $CE ?></h4>
 
     <h4 style="text-align:center;">Actividades</h4>
     <table style="margin:auto;">
@@ -54,19 +57,25 @@
         <th>Materia</th>
         <th>Descripcion</th>
         <th>Fecha realizada</th>
+        <th>Calificación</th>
       </tr>
     <?php
 
-      $sql = "SELECT * FROM actividades WHERE periodo = '".$periodo."' AND grupo_fk = '".$grupo."' AND status = '200'";
+      $sql = "SELECT relactividades.id_actividad, relactividades.id_alumno, relactividades.calificacion, relactividades.materia, relactividades.periodo,
+      actividades.id, actividades.titulo, actividades.descripcion, actividades.fecha_realizada, materia.id, materia.nombre FROM relactividades
+      INNER JOIN actividades ON relactividades.id_actividad = actividades.id
+      INNER JOIN materia ON relactividades.materia = materia.id
+      WHERE relactividades.id_alumno = '".$son."' AND relactividades.periodo = '".$periodo."'";
       $resultado = mysqli_query($con, $sql);
       while ($fila = mysqli_fetch_array($resultado)) {
         echo '
 
         <tr>
           <td>'.$fila['titulo'].'</td>
-          <td>'.$fila['materia'].'</td>
+          <td>'.$fila['nombre'].'</td>
           <td>'.$fila['descripcion'].'</td>
           <td>'.$fila['fecha_realizada'].'</td>
+          <td>'.$fila['calificacion'].'</td>
         </tr>
 
         ';
@@ -81,19 +90,25 @@
         <th>Materia</th>
         <th>Descripcion</th>
         <th>Fecha de entrega</th>
+        <th>Calificación</th>
       </tr>
     <?php
 
-      $sql = "SELECT * FROM tareas WHERE periodo = '".$periodo."' AND grupo = '".$grupo."' AND status = '200'";
+      $sql = "SELECT reltarea.id_tarea, reltarea.id_alumno, reltarea.calificacion, reltarea.materia, reltarea.periodo,
+      tareas.id, tareas.materia, tareas.titulo, tareas.descripcion, tareas.fecha_ent, materia.id, materia.nombre FROM reltarea
+      INNER JOIN tareas ON reltarea.id_tarea = tareas.id
+      INNER JOIN materia ON reltarea.materia = materia.id
+      WHERE reltarea.id_alumno = '".$son."' AND reltarea.periodo = '".$periodo."'";
       $resultado = mysqli_query($con, $sql);
       while ($fila = mysqli_fetch_array($resultado)){
         echo '
 
         <tr>
           <td>'.$fila['titulo'].'</td>
-          <td>'.$fila['materia'].'</td>
+          <td>'.$fila['nombre'].'</td>
           <td>'.$fila['descripcion'].'</td>
           <td>'.$fila['fecha_ent'].'</td>
+          <td>'.$fila['calificacion'].'</td>
         </tr>
 
         ';

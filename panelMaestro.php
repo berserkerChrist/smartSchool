@@ -143,6 +143,16 @@
           <br>
         </div>
 
+        <div id="tareasArchivo" class="espacioTop paddingSides none">
+          <div id="hintTareas" class="alert alert-info" role="alert">
+            <strong>En esta seccion puedes echar un vistazo a las tareas que has asignado a tu grupo</strong>
+          </div>
+          <br>
+          <div id="mostrarTareasDoc"></div>
+          <div id="cargandoDoc" class="text-center"></div>
+          <br>
+        </div>
+
         <!--planeacion-->
         <div id="planeacion" class="espacioTop paddingSides none">
 
@@ -183,10 +193,12 @@
                     <select class="form-control" name="actividad">
                       <?php
 
-                        $sql = "SELECT * FROM actividades WHERE status = '300' AND grupo_fk = '".$grupo."' ORDER BY id DESC";
+                        $sql = "SELECT actividades.titulo, materia.nombre, materia.id, actividades.id AS a FROM actividades
+                        INNER JOIN materia ON actividades.materia = materia.id
+                        WHERE actividades.status = '300' AND actividades.grupo_fk = '".$grupo."' ORDER BY actividades.id DESC";
                         $resultado = mysqli_query($con, $sql);
                         while($fila = mysqli_fetch_array($resultado)){
-                          echo "<option value=".$fila['id'].">".$fila['titulo']."</option>";
+                          echo "<option value=".$fila['a'].">".$fila['titulo']."</option>";
                         }
                       ?>
                     </select>
@@ -260,13 +272,15 @@
               <form action="src/drivers/driverTareas.php" method="post">
                 <div class="form-row">
                   <div class="col-md-9">
-                    <select class="form-control" name="tarea">
+                    <select class="form-control" name="tareaPublicar">
                       <?php
                         include('src/conexion_bd.php');
-                        $sql = "SELECT * FROM tareas WHERE status = '300' AND grupo = '".$grupo."' ORDER BY id DESC";
+                        $sql = "SELECT tareas.titulo, materia.id, materia.nombre, tareas.id AS t FROM tareas
+                        INNER JOIN materia ON tareas.materia = materia.id
+                        WHERE tareas.status = '300' AND tareas.grupo = '".$grupo."' ORDER BY tareas.id DESC;";
                         $resultado = mysqli_query($con, $sql);
                         while($fila = mysqli_fetch_array($resultado)){
-                          echo "<option value=".$fila['id'].">".$fila['titulo']."</option>";
+                          echo "<option value=".$fila['t'].">".$fila['titulo']." - ".$fila['nombre']."</option>";
                         }
                       ?>
                     </select>

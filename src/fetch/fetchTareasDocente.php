@@ -6,7 +6,8 @@
   $inicio = $con -> real_escape_string($_POST['inicioDocTareas']);
   $grupo = $_SESSION['grupoDocente'];
 
-  $sql = "SELECT * FROM tareas WHERE grupo = '".$grupo."' AND status = '200' ORDER BY id DESC LIMIT ".$inicio.", ".$limite."";
+  $sql = "SELECT * FROM tareas INNER JOIN materia ON tareas.materia = materia.id
+  WHERE tareas.grupo = '".$grupo."' AND tareas.status = '200' ORDER BY tareas.id DESC LIMIT ".$inicio.", ".$limite."";
 
   //$sql2 = "SELECT materia.nombre, tareas.materia FROM materia, tareas WHERE materia.id = tareas.materia AND status = '200'";
 
@@ -27,7 +28,7 @@
                 <div class="col-md-6">
                   <h6 class="text-primary">Materia</h6>
                   <hr>
-                  <p class="text-dark">'.$fila['materia'].'</p>
+                  <p class="text-dark">'.$fila['nombre'].'</p>
                 </div>
               </div>
                 <h6 class="text-primary">Descripción</h6>

@@ -21,9 +21,15 @@ if(!empty($_FILES["excelPlaneacion"])){
                    $titulo = mysqli_real_escape_string($con, $worksheet->getCellByColumnAndRow(3, $row)->getValue());
                    $descripcion = mysqli_real_escape_string($con, $worksheet->getCellByColumnAndRow(4, $row)->getValue());
                    $fecha_ent = mysqli_real_escape_string($con, $worksheet->getCellByColumnAndRow(5, $row)->getValue());
+                   $upload = mysqli_real_escape_string($con, $worksheet->getCellByColumnAndRow(6, $row)->getValue());
+                   if ($upload == 'x') {
+                     $upload = true;
+                   }else {
+                     $upload = false;
+                   }
                    $status = '300';
-                   $query = "INSERT INTO tareas (materia, semana, titulo, descripcion, fecha_ent, periodo, grupo, status)
-                   VALUES ('$materia', '$semana', '$titulo', '$descripcion', '$fecha_ent', '$periodo', '$grupo', '$status')";
+                   $query = "INSERT INTO tareas (materia, semana, titulo, descripcion, fecha_ent, periodo, grupo, status, upload)
+                   VALUES ('$materia', '$semana', '$titulo', '$descripcion', '$fecha_ent', '$periodo', '$grupo', '$status', '$upload')";
                    mysqli_query($con, $query);
                    //tareas
               }

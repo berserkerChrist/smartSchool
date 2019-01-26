@@ -25,8 +25,10 @@
      if($resultado){
        header('Location: ../../panelMaestro.php');
      }
-  }else if(isset($_POST['publicarTarea'])){
-    $tarea = $con -> real_escape_string($_POST['tarea']);
+  }
+
+  else if(isset($_POST['publicarTarea'])){
+    $tarea = $con -> real_escape_string($_POST['tareaPublicar']);
     $sql = "UPDATE tareas SET status = '200' WHERE id = '".$tarea."'";
     $resultado = mysqli_query($con, $sql);
     if($resultado){

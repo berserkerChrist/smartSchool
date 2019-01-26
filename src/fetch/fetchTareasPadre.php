@@ -6,13 +6,17 @@
   $inicio = $con -> real_escape_string($_POST['inicio']);
   $alumno = $_SESSION['hijo'];
 
-  $sql = "SELECT * FROM tareas INNER JOIN alumno ON alumno.nickname = '".$alumno."'
+  $sql = "SELECT tareas.id, tareas.titulo, tareas.materia, tareas.descripcion, tareas.fecha_ent, tareas.grupo, tareas.status, tareas.upload,
+          alumno.nickname, alumno.grupo_fk, materia.id, materia.nombre  FROM tareas
+          INNER JOIN alumno ON alumno.nickname = '".$alumno."'
+          INNER JOIN materia ON tareas.materia = materia.id
           WHERE tareas.grupo = alumno.grupo_fk AND tareas.status = '200'
-          ORDER BY id DESC LIMIT ".$inicio.", ".$limite."";
+          ORDER BY tareas.id DESC LIMIT ".$inicio.", ".$limite."";
 
-  /*$sql2 = "SELECT materia.nombre, tareas.materia, alumno.nickname FROM materia, tareas, alumno
-           WHERE materia.id = tareas.materia AND status = '200' AND alumno.nickname = '".$alumno."'
-           ORDER BY tareas.id DESC";*/
+  /*$sql2 = "SELECT * FROM tareas INNER JOIN alumno ON alumno.nickname = '".$alumno."'
+          WHERE tareas.grupo = alumno.grupo_fk AND tareas.status = '200'
+          ORDER BY id DESC LIMIT ".$inicio.", ".$limite."";*/
+
 
   $resultado = mysqli_query($con, $sql);
   //$resultado2 = mysqli_query($con, $sql2);

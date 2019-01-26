@@ -950,7 +950,10 @@ $(document).ready(function() {
       },
       cache: false,
       success: function(data) {
-
+        setTimeout(function(){
+          $('#hintTareas').fadeOut("slow");
+        }, 5000);
+        $('#hint').show();
         $('#mostrarTareasDoc').append(data);
         if (data == '') {
           $('#cargandoDoc').html("<button type='button' class='btn btn-info'>No hay más tareas :D</button>");

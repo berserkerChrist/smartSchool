@@ -21,6 +21,7 @@
   while ($fila = mysqli_fetch_array($resultado)) {
     //$fila2 = mysqli_fetch_array($resultado2);
     echo'
+    <div class="card w-100 mx-auto shadow">
       <div class="card-body">
         <div class="row">
           <div class="col-md-6">
