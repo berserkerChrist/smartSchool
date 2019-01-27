@@ -30,6 +30,7 @@ $(document).ready(function(){
  });
 //subir excel
 
+
 //select para alumnos
 $(document).ready(function(){
   $('#selectGrupo').change(function(){
@@ -982,3 +983,53 @@ $(document).ready(function() {
   });
 });
 //onScroll tareas docente
+
+//onScroll tareas docente archivo
+$(document).ready(function() {
+
+  var limiteDocTareasArc = 12;
+  var inicioDocTareasArc = 0;
+  var action = 'inactive';
+
+  function cargarTareas(limiteDocTareasArc, inicioDocTareasArc) {
+    $.ajax({
+      url: "src/fetch/fetchTareasArchivo.php",
+      type: "POST",
+      data: {
+        limiteDocTareasArc: limiteDocTareasArc,
+        inicioDocTareasArc: inicioDocTareasArc
+      },
+      cache: false,
+      success: function(data) {
+        setTimeout(function(){
+          $('#hintTareas').fadeOut("slow");
+        }, 5000);
+        $('#hint').show();
+        $('#mostrarTareasDocArchivo').append(data);
+        if (data == '') {
+          $('#cargandoDocArchivo').html("<button type='button' class='btn btn-info'>No hay más tareas :D</button>");
+          action = 'active';
+        } else {
+          $('#cargandoDocArchivo').html("<button type='button' class='btn btn-warning'>Espera un momento...</button>");
+          action = 'inactive';
+        }
+      }
+    });
+  }
+
+  if (action == 'inactive') {
+    action = 'active';
+    cargarTareas(limiteDocTareasArc, inicioDocTareasArc);
+  }
+
+  $(window).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() > $("#mostrarTareasDoc").height() && action == 'inactive') {
+      action = 'active';
+      inicioDocTareasArc = inicioDocTareasArc + limiteDocTareasArc;
+      setTimeout(function() {
+        cargarTareas(limiteDocTareasArc, inicioDocTareasArc);
+      }, 1000);
+    }
+  });
+});
+//onScroll tareas docente archivo

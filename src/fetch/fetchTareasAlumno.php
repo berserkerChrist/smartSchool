@@ -5,8 +5,10 @@
   $limite = $con -> real_escape_string($_POST['limite']);
   $inicio = $con -> real_escape_string($_POST['inicio']);
   $grupo = $_SESSION['grupofkAlumno'];
+  $alumno = $_SESSION['nickname'];
 
-  $sql = "SELECT * FROM tareas INNER JOIN materia ON tareas.materia = materia.id
+  $sql = "SELECT tareas.titulo, tareas.descripcion, tareas.materia, tareas.fecha_ent, tareas.upload, tareas.periodo, materia.id, materia.nombre, tareas.id AS tid FROM tareas
+  INNER JOIN materia ON tareas.materia = materia.id
   WHERE tareas.grupo = '".$grupo."' AND tareas.status = '200' ORDER BY tareas.id DESC LIMIT ".$inicio.", ".$limite."";
   $resultado = mysqli_query($con, $sql);
   //$resultado2 = mysqli_query($con, $sql2);
@@ -41,7 +43,14 @@
             <div class="col-md-6">
               <h6 class="text-primary">Sube aqui tu tarea</h6>
               <hr>
-              <input type="file" name="tareaAlumno" id="tareaAlumno">
+              <form action="src/drivers/driverUploads.php" method="post" enctype="multipart/form-data">
+                <input name="archivoTarea" type="file">
+                <br>
+                <input type="submit" name="submitTarea" class="btn btn-primary" value="Subir tarea">
+                <input type="hidden" name="idTarea" value="'.$fila['tid'].'">
+                <input type="hidden" name="materiaArc" value="'.$fila['materia'].'">
+                <input type="hidden" name="periodoArc" value="'.$fila['periodo'].'">
+              </form>
             </div>
           </div>
         </div>

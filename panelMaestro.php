@@ -148,8 +148,8 @@
             <strong>En esta seccion puedes echar un vistazo a las tareas que has asignado a tu grupo</strong>
           </div>
           <br>
-          <div id="mostrarTareasDoc"></div>
-          <div id="cargandoDoc" class="text-center"></div>
+          <div id="mostrarTareasDocArchivo"></div>
+          <div id="cargandoDocArchivo" class="text-center"></div>
           <br>
         </div>
 
