@@ -32,11 +32,21 @@ $(document).ready(function(){
                     hoverBorderColor: '#666666',
                     data: calificaciones
                 }],
-          };   
+          };
+
           var grafica = $("#line-chart");
           var linechart = new Chart(grafica, {
               type: 'line',
-              data: datosGrafica
+              data: datosGrafica,
+              options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
           });
       }
     });
@@ -72,7 +82,16 @@ $(document).ready(function(){
           var grafica = $("#line-chartTareas");
           var linechart = new Chart(grafica, {
               type: 'line',
-              data: datosGrafica
+              data: datosGrafica,
+              options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
           });
       }
     });

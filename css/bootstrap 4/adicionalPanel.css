@@ -54,8 +54,8 @@ a {
 
 .paddingSides {
   padding-top: 20px;
-  padding-right: 6rem;
-  padding-left: 6rem;
+  padding-right: 12rem;
+  padding-left: 12rem;
 }
 
 .espacioTop{
@@ -96,6 +96,25 @@ a {
 .bg-darkB{
   background: #5983e8;
   color: white;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    cursor: inherit;
+    display: block;
 }
 
 .text-darkB{

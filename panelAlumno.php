@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 
-<html lang="en" dir="ltr">
+<html lang="es" dir="ltr">
 
 <head>
   <meta charset="utf-8">
@@ -119,6 +119,7 @@
   <!--wrapper-->
 
   <script type="text/javascript">
+
     //control de panel lateral
     $(document).ready(function() {
 

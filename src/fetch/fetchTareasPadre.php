@@ -36,7 +36,7 @@
                 <div class="col-md-6">
                   <h6 class="text-primary">Materia</h6>
                   <hr>
-                  <p class="text-dark">'.$fila['materia'].'</p>
+                  <p class="text-dark">'.$fila['nombre'].'</p>
                 </div>
               </div>
                 <h6 class="text-primary">Descripción</h6>

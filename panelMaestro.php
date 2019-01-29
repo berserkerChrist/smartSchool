@@ -163,10 +163,10 @@
 
             <div class="card-body">
               <form action="#" method="post" id="subirExcel">
-                <label>Selecciona tu archivo de planeacion</label>
-                <br>
-                <br>
-                <input type="file" name="excelPlaneacion" id="excelPlaneacion">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="excelPlaneacion" id="excelPlaneacion">
+                  <label class="custom-file-label" for="excelPlaneacion">Elegir archivo</label>
+                </div>
               </form>
               <br>
               <div id="result">
@@ -342,12 +342,10 @@
                   </div>
                 </div>
                 <br>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="archivo">
-                    <label class="form-check-label" for="defaultCheck1">
-                      Marca esta casilla si deseas que el alumno suba un archivo a la plataforma
-                    </label>
-                  </div>
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" name="archivo">
+                  <label class="form-check-label" for="exampleCheck1">Activa esta opción si deseas que tu alumno suba un archivo de esta tarea a la plataforma</label>
+                </div>
                 <br>
                 <input type="submit" class="btn btn-primary" name="crearTarea" value="Crear">
               </form>
@@ -764,6 +762,15 @@
     <!--wrapper-->
 
     <script type="text/javascript">
+
+    $('#excelPlaneacion').on('change',function(){
+          //get the file name
+          var text = $(this).val();
+          //replace the "Choose a file" label
+          text = text.substring(text.lastIndexOf("\\") + 1, text.length);
+          $(this).next('.custom-file-label').html(text);
+      });
+
       //control de panel lateral
       $(document).ready(function() {
 
