@@ -280,7 +280,7 @@
                       <div class="form-row" style="padding-top: 1.2rem;">
                         <div class="col">
                           <label for="nombre">Nombre(s):</label>
-                          <input type="text" class="form-control" name="nombrePadre" id="nombre" pattern="[a-zA-Z]+" title="No se admiten caracteres especiales o números" required>
+                          <input type="text" class="form-control" name="nombrePadre" id="nombre" pattern="[a-zA-Z\s]+" title="No se admiten caracteres especiales o números" required>
                         </div>
                         <div class="col">
                           <label for="apellidoPat">Apellido Paterno:</label>
@@ -375,15 +375,15 @@
                     <div class="form-row">
                       <div class="col-md-6 mb-2">
                         <label for="nombreProv">Nombre(s)</label>
-                        <input type="text" class="form-control" id="nombreProv" name="nombreAlumno" pattern="[a-zA-Z\s]+" title="No se admiten caracteres especiales o números" required>
+                        <input type="text" class="form-control" name="nombreAlumno" pattern="[a-zA-Z\s]+" title="No se admiten caracteres especiales o números" required>
                       </div>
                       <div class="col-md-3 mb-2">
                         <label for="apPaterno">Apellido paterno</label>
-                        <input type="text" class="form-control" id="apPaterno" name="apPaterno" pattern="[a-zA-Z]+" title="No se admiten caracteres especiales o números" required>
+                        <input type="text" class="form-control"  name="apPaterno" pattern="[a-zA-Z]+" title="No se admiten caracteres especiales o números" required>
                       </div>
                       <div class="col-md-3 mb-2">
                         <label for="apMaterno">Apellido materno</label>
-                        <input type="text" class="form-control" id="apMaterno" name="apMaterno" pattern="[a-zA-Z]+" title="No se admiten caracteres especiales o números" required>
+                        <input type="text" class="form-control" name="apMaterno" pattern="[a-zA-Z]+" title="No se admiten caracteres especiales o números" required>
                       </div>
                     </div>
                     <div class="form-row">

@@ -209,7 +209,7 @@
                 </div>
               </form>
               <br>
-              <h6 class="text-primary">Si lo deseas, tambien puedes crear una nueva</h6>
+              <h6 class="text-primary">Si lo deseas, también puedes crear una nueva</h6>
               <hr>
               <form action="src/drivers/driverActividades.php" method="post">
                 <div class="form-row">
@@ -233,7 +233,7 @@
                   <div class="col-md-4">
                     <label for="periodoTarea">Periodo</label>
                     <select class="form-control" name="periodoAct" required>
-                      <option value="">Periodo de evaluacion</option>
+                      <option value="">Periodo de evaluación</option>
                       <?php
                         $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
                         $resultado = mysqli_query($con, $sql);
@@ -291,12 +291,12 @@
                 </div>
               </form>
               <br>
-              <h6 class="text-primary">Si lo deseas, tambien puedes crear una nueva</h6>
+              <h6 class="text-primary">Si lo deseas, también puedes crear una nueva</h6>
               <hr>
               <form action="src/drivers/driverTareas.php" method="post">
                 <div class="form-row">
                   <div class="col-md-4">
-                    <label for="titulo">Titulo</label>
+                    <label for="titulo">título</label>
                     <input type="text" class="form-control" name="titulo">
                   </div>
                   <div class="col-md-4">
@@ -326,7 +326,7 @@
                   <div class="col-md-3">
                     <label for="periodoTarea">Periodo</label>
                     <select class="form-control" name="periodoTarea" required>
-                      <option value="">Periodo de evaluacion</option>
+                      <option value="">Periodo de evaluación</option>
                       <?php
                         $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
                         $resultado = mysqli_query($con, $sql);
@@ -383,7 +383,7 @@
                       <div class="col-md-4">
                         <label for="periodo">Periodo:</label>
                         <select class="form-control" name="periodo" id="selectPeriodo" required>
-                          <option value="">Selecciona un periodo de evaluacion</option>
+                          <option value="">Selecciona un periodo de evaluación</option>
                           <?php
                           $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
                           $resultado = mysqli_query($con, $sql);
@@ -426,7 +426,7 @@
                       <div class="col-md-4">
                         <label for="periodo">Periodo:</label>
                         <select class="form-control" name="periodoTareas" id="selectPeriodoTareas" required>
-                          <option value="">Selecciona un periodo de evaluacion</option>
+                          <option value="">Selecciona un periodo de evaluación</option>
                           <?php
                           $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
                           $resultado = mysqli_query($con, $sql);
@@ -468,7 +468,7 @@
                     <div class="col-md-6">
                       <label for="periodo">Periodo:</label>
                       <select class="form-control" name="periodoTareas" id="selectPeriodoParEx" required>
-                        <option value="">Selecciona un periodo de evaluacion</option>
+                        <option value="">Selecciona un periodo de evaluación</option>
                         <?php
                         $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
                         $resultado = mysqli_query($con, $sql);
@@ -525,7 +525,7 @@
                       <label for="periodo">Periodo:</label>
                       <div class="input-group">
                         <select class="form-control" name="periodoTareas" id="selectPeriodoPromedios" required>
-                          <option value="">Selecciona un periodo de evaluacion</option>
+                          <option value="">Selecciona un periodo de evaluación</option>
                           <?php
                           $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
                           $resultado = mysqli_query($con, $sql);
@@ -571,7 +571,7 @@
                   <form id="escalaRetro" method="post">
                     <div class="form-row">
                       <div class="col-md-4">
-                        <label for="titulo">Titulo</label>
+                        <label for="titulo">título</label>
                         <input type="text" class="form-control" name="tituloProyecto" required>
                       </div>
                       <div class="col-md-4">
@@ -590,7 +590,7 @@
                       <div class="col-md-4">
                         <label for="">Periodo</label>
                         <select class="form-control" name="periodoProyecto" required>
-                          <option value="">Periodo de evaluacion</option>
+                          <option value="">Periodo de evaluación</option>
                           <?php
                             $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
                             $resultado = mysqli_query($con, $sql);
@@ -642,17 +642,24 @@
                 <div class="tab-pane" id="tab2Proyecto">
                   <form id="formularioCalPro" method="post">
                     <div class="row">
-                      <div class="col-md-4">
+                      <div class="col-md-6">
                         <label for="periodo">Periodo:</label>
                         <select class="form-control" name="periodoProyecto" id="selectPeriodoProyecto" required>
-                          <option value="">Selecciona un periodo de evaluacion</option>
+                          <option value="">Selecciona un periodo de evaluación</option>
                           <?php
-                          $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
-                          $resultado = mysqli_query($con, $sql);
-                          while ($fila = mysqli_fetch_array($resultado)) {
-                            echo "<option value=".$fila['id'].">".$fila['periodo']."</option>";
-                          }
-                        ?>
+                            $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
+                            $resultado = mysqli_query($con, $sql);
+                            while ($fila = mysqli_fetch_array($resultado)) {
+                              echo "<option value=".$fila['id'].">".$fila['periodo']."</option>";
+                            }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="periodo">Proyecto:</label>
+                        <select class="form-control" name="periodoProyecto" id="idProyectoCal" required>
+                          <option value="">Selecciona el proyecto a calificar</option>
+
                         </select>
                       </div>
                     </div>
@@ -680,7 +687,7 @@
             <form action="src/pluginPDF/formato.php" method="post">
               <label for="periodoReporteDocente">Selecciona el periodo del reporte</label>
               <select class="form-control" name="periodoReporteDocente" required>
-                <option value="">Periodo de evaluacion</option>
+                <option value="">Periodo de evaluación</option>
                 <?php
                     $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
                     $resultado = mysqli_query($con, $sql);
@@ -714,7 +721,7 @@
                 <div class="col-md-4">
                   <label for="periodo">Periodo:</label>
                   <select class="form-control" name="periodoComentario" required>
-                    <option value="">Selecciona un periodo de evaluacion</option>
+                    <option value="">Selecciona un periodo de evaluación</option>
                     <?php
                       $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
                       $resultado = mysqli_query($con, $sql);

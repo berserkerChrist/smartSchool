@@ -43,4 +43,16 @@
       echo "<option value=".$fila['id'].">".$fila['titulo']."</option>";
     }
   }
+
+  if (isset($_POST['periodoCalProy'])) {
+    $grupo = $_SESSION['grupoDocente'];
+    $periodo = $_POST['periodoCalProy'];
+    $sql = "SELECT id, titulo FROM proyecto WHERE grupo_fk = '".$grupo."' AND periodo = '".$periodo."' ORDER BY id DESC";
+    $resultado = mysqli_query($con, $sql);
+    echo "<option>Selecciona un proyecto</option>";
+    while($fila = mysqli_fetch_array($resultado)){
+      echo "<option value=".$fila['id'].">".$fila['titulo']."</option>";
+    }
+  }
+ ?>
  ?>

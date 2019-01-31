@@ -30,7 +30,6 @@ $(document).ready(function(){
  });
 //subir excel
 
-
 //select para alumnos
 $(document).ready(function(){
   $('#selectGrupo').change(function(){
@@ -47,7 +46,7 @@ $(document).ready(function(){
       });
   });
 });
-//select para alumnos
+//select para alumno
 
 //select para materias de periodo
 $(document).ready(function(){
@@ -217,6 +216,22 @@ function  insertarCalificacionPE(idAlumno){
 //calificacion proyecto
 $(document).ready(function(){
   $('#selectPeriodoProyecto').change(function(){
+      var periodo = $(this).val();
+      $.ajax({
+        type: "POST",
+        url: "src/select.php",
+        data: {periodoCalProy:periodo},
+        success: function(resp) {
+            if(resp != "") {
+                $('#idProyectoCal').html(resp); //Muestra la consulta en el div con el id="ver-buscar"
+            }
+        }
+      });
+  });
+});
+
+$(document).ready(function(){
+  $('#idProyectoCal').change(function(){
       var selectPeriodoProyecto = $(this).val();
       $.ajax({
         type: "POST",
@@ -232,15 +247,16 @@ $(document).ready(function(){
       });
   });
 });
-function insertarCalificacionProyecto(idProyecto) {
-  var calificacion = $('#'+idProyecto+'calProyecto').val();
-  var idAlumno = $('#'+idProyecto+'Nombre').val();
+function insertarCalificacionProyecto(idAlumno) {
+  var calificacion = $('#'+idAlumno+'calProyecto').val();
+  var idProyecto = $('#idProyectoCal').val();
+  var periodo = $('#selectPeriodoProyecto').val();
 
   $.ajax({
 
     url: 'src/insertCalificacionProyecto.php',
     method: 'POST',
-    data: {id:idProyecto, alumno:idAlumno, calificacion:calificacion},
+    data: {id:idProyecto, alumno:idAlumno, calificacion:calificacion, periodoCalProyecto:periodo},
     success: function (resp){
       if(resp != "") {
           $('#capturaProyecto').html(resp); //Muestra la consulta en el div con el id="verDivStock"

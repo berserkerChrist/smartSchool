@@ -434,7 +434,7 @@ session_start();
             <label for="nominaDocente">Nomina:</label>
             <input type="text" name="nominaDocente" id="nominaDocente" class="form-control" disabled>
             <label for="nombreDoc">Nombre:</label>
-            <input type="text" name="nombreDoc" id="nombreDoc" pattern="[a-zA-Z]+" title="No se admiten caracteres especiales o números" class="form-control">
+            <input type="text" name="nombreDoc" id="nombreDoc" pattern="[a-zA-Z\s]+" title="No se admiten caracteres especiales o números" class="form-control">
             <br />
             <label for="apPaternoDocente">Apellido paterno:</label>
             <input type="text" name="apPaternoDocente" id="apPaternoDocente" pattern="[a-zA-Z]+" title="No se admiten caracteres especiales o números" class="form-control">
