@@ -1,8 +1,8 @@
 <?php
 	$servidor = "localhost";
-	$usuario = "root";
-	$contraseña = "";
-	$basedatos = "smartschool";
+	$usuario = "u788024793_brskr";
+	$contraseña = "Admin1234#";
+	$basedatos = "u788024793_smart";
 
 	$con = mysqli_connect ($servidor, $usuario, $contraseña)
 	or die

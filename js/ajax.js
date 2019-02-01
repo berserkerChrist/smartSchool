@@ -390,7 +390,7 @@ function buscarDocente() {
 $(document).ready(function(){
   $(document).on('click', '.baja-docente', function(){
     var nomina = $(this).attr("id");
-    alert(nomina);
+    confirm("¿Seguro que deseas dar de baja a "+ nomina+ "?");
     $.ajax({
       url: "src/updateMaestro.php",
       method: "POST",
@@ -431,6 +431,7 @@ function buscarAlumno() {
 $(document).ready(function(){
   $(document).on('click', '.baja-alumno', function(){
     var nick = $(this).attr("id");
+    confirm("¿Seguro que deseas dar de baja a "+nick+"?");
     $.ajax({
       url: "src/updateAlumno.php",
       method: "POST",
