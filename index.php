@@ -238,7 +238,7 @@
             <div class="card-body">
               <div class="tab-content">
                 <div id="dadTab" class="container tab-pane active">
-                    <form action="src/registroPadre.php" method="post">
+                    <form action="src/registroPadre.php" method="post" onsubmit="compararPassPadre(this)">
                       <h6 class="text-primary">Datos de alumno</h6>
                       <hr>
                       <div class="form-row">
@@ -306,7 +306,7 @@
                     </form>
                 </div>
                 <div id="teach" class="container tab-pane">
-                  <form method="post" id="regDocente">
+                  <form method="post" id="regDocente" onsubmit="compararPassMaestro(this)">
                     <div class="form-row">
                       <div class="col-md-8 mb-3">
                         <label for="nominaReg">Ingresa tu nomina:</label>
@@ -349,7 +349,7 @@
                   </form>
                 </div>
                 <div id="stude" class="container tab-pane">
-                  <form action="src/registroAlumno.php" method="post">
+                  <form action="src/registroAlumno.php" method="post" onsubmit="compararPassAlumno(this)">
                     <h6 class="text-primary">Datos de alumno</h6>
                     <hr>
                     <div class="form-row">
@@ -517,7 +517,34 @@
   <!--modalInicio -->
 </body>
 
-<script>
+<script type="text/javascript">
+
+  function compararPassPadre(registro){
+    if (registro.passwordRegistro.value != registro.passwordRegistro2.value) {
+      alert("!Las contraseñas no coinciden!");
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  function compararPassMaestro(registro){
+    if (registro.passwordReg.value != registro.passwordReg2.value) {
+      alert("!Las contraseñas no coinciden!");
+      return false;
+    }else {
+      return true;
+    }
+  }
+
+  function compararPassAlumno(registro){
+    if (registro.password.value != registro.pwd1.value) {
+      alert("!Las contraseñas no coinciden!");
+      return false;
+    }else {
+      return true;
+    }
+  }
 
   $(document).ready(function() {
     // Add scrollspy to <body>

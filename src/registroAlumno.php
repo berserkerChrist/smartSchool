@@ -9,12 +9,6 @@
   $nickname = $con->real_escape_string($_POST['nickname']);
   $password = $con->real_escape_string($_POST['password']);
 
-  echo $nombreAlumno;
-  echo $apPaterno;
-  echo $apMaterno;
-  echo $grupo;
-  echo $nickname;
-  echo $password;
 
   $sql = "INSERT INTO alumno (nickname, password, nombre, ap_paterno, ap_materno, grupo_fk, status)
   VALUES ('$nickname', '$password', '$nombreAlumno', '$apPaterno', '$apMaterno', '$grupo', '200')";
