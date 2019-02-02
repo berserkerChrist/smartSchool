@@ -215,7 +215,7 @@ function  insertarCalificacionPE(idAlumno){
 
 //calificacion proyecto
 $(document).ready(function(){
-  $('#selectPeriodoProyecto').change(function(){
+  $('#selectPeriodoProyecto01').change(function(){
       var periodo = $(this).val();
       $.ajax({
         type: "POST",
@@ -232,11 +232,9 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   $('#idProyectoCal').change(function(){
-      var selectPeriodoProyecto = $(this).val();
       $.ajax({
         type: "POST",
         url: "src/drivers/driverCalProyecto.php",
-        data: {periodoProyectoshi:selectPeriodoProyecto},
         success: function(resp) {
             if(resp != "") {
                 $('#formCalificacionesProyecto').html(resp); //Muestra la consulta en el div con el id="ver-buscar"
@@ -250,13 +248,11 @@ $(document).ready(function(){
 function insertarCalificacionProyecto(idAlumno) {
   var calificacion = $('#'+idAlumno+'calProyecto').val();
   var idProyecto = $('#idProyectoCal').val();
-  var periodo = $('#selectPeriodoProyecto').val();
-
+  var periodocal = $('#selectPeriodoProyecto01').val();
   $.ajax({
-
     url: 'src/insertCalificacionProyecto.php',
     method: 'POST',
-    data: {id:idProyecto, alumno:idAlumno, calificacion:calificacion, periodoCalProyecto:periodo},
+    data: {id:idProyecto, alumno:idAlumno, calificacion:calificacion, periodoCalProyecto:periodocal},
     success: function (resp){
       if(resp != "") {
           $('#capturaProyecto').html(resp); //Muestra la consulta en el div con el id="verDivStock"

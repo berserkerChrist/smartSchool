@@ -1,7 +1,6 @@
 <?php
   session_start();
   include('../conexion_bd.php');
-  $periodo = $con->real_escape_string($_POST['periodoProyectoshi']);
   $grupo = $_SESSION['grupoDocente'];
   $sql = "SELECT nickname, nombre, ap_paterno, ap_materno FROM alumno WHERE grupo_fk = '".$grupo."'";
   $resultado = mysqli_query($con, $sql);

@@ -1,7 +1,7 @@
 <?php
 	$servidor = "localhost";
 	$usuario = "u788024793_brskr";
-	$contraseña = "Admin1234#";
+	$contraseña = "cNwuLl9ica7U";
 	$basedatos = "u788024793_smart";
 
 	$con = mysqli_connect ($servidor, $usuario, $contraseña)

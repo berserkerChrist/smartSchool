@@ -644,7 +644,7 @@
                     <div class="row">
                       <div class="col-md-6">
                         <label for="periodo">Periodo:</label>
-                        <select class="form-control" name="periodoProyecto" id="selectPeriodoProyecto" required>
+                        <select class="form-control" name="periodoProyecto" id="selectPeriodoProyecto01" required>
                           <option value="">Selecciona un periodo de evaluación</option>
                           <?php
                             $sql = "SELECT * FROM p_evaluacion WHERE status = '200'";
