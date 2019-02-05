@@ -5,7 +5,6 @@ include('conexion_bd.php');
 $nomina = $con->real_escape_string($_POST['nominaReg']);
 $password = $con->real_escape_string($_POST['passwordReg']);
 
-
 $sql = "UPDATE maestro
   SET
   password = '".$password."',
@@ -21,5 +20,4 @@ if ($resultado) {
   echo "Ocurrio un error :(";
 }
 
-
- ?>
+?>

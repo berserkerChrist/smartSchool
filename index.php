@@ -521,7 +521,7 @@
 
   function compararPassPadre(registro){
     if (registro.passwordRegistro.value != registro.passwordRegistro2.value) {
-      alert("!Las contraseñas no coinciden!");
+      alert("!Las contraseñas no coinciden! intentalo de nuevo");
       return false;
     }else {
       return true;
@@ -530,7 +530,7 @@
 
   function compararPassMaestro(registro){
     if (registro.passwordReg.value != registro.passwordReg2.value) {
-      alert("!Las contraseñas no coinciden!");
+      alert("!Las contraseñas no coinciden! intentalo de nuevo");
       return false;
     }else {
       return true;
@@ -539,7 +539,7 @@
 
   function compararPassAlumno(registro){
     if (registro.password.value != registro.pwd1.value) {
-      alert("!Las contraseñas no coinciden!");
+      alert("!Las contraseñas no coinciden! intentalo de nuevo");
       return false;
     }else {
       return true;

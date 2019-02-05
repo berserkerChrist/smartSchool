@@ -3,7 +3,10 @@
 
     if (!empty($_POST['modificarAlumno'])) {
         if (!empty($alumno = $con->real_escape_string($_POST['modificarAlumno']))) {
-            $sql = "SELECT * FROM alumno WHERE nombre LIKE '%".$alumno."%' AND status = '200'";
+            //$sql = "SELECT * FROM alumno WHERE nombre LIKE '%".$alumno."%' AND status = '200'";
+            $sql = "SELECT alumno.nombre, alumno.nickname, alumno.ap_paterno, alumno.ap_materno, alumno.grupo_fk, alumno.status,
+            grupo.id_grupo, grupo.grupo, grupo.ciclo_escolar FROM alumno INNER JOIN grupo ON alumno.grupo_fk = grupo.id_grupo
+            WHERE alumno.nombre LIKE '%".$alumno."%' AND alumno.status = '200'";
             $resultado = $con->query($sql);
             if (mysqli_num_rows($resultado) > 0) {
               echo '

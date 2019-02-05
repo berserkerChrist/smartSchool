@@ -229,7 +229,6 @@ $(document).ready(function(){
       });
   });
 });
-
 $(document).ready(function(){
   $('#idProyectoCal').change(function(){
       $.ajax({
