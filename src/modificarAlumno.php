@@ -29,7 +29,7 @@
                                     <td>'.$row["nombre"].'</td>
                                     <td>'.$row["ap_paterno"].'</td>
                                     <td>'.$row["ap_materno"].'</td>
-                                    <td>'.$row["grupo_fk"].'</td>
+                                    <td>'.$row["grupo"].' '.$row['ciclo_escolar'].'</td>
                                     <td><input type="button" name="edit" value="Modificar" id="'.$row["nickname"].'" class="btn btn-info edit_data_alumno" /></td>
                                </tr>';
                                }
