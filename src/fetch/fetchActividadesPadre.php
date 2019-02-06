@@ -8,7 +8,7 @@
 
   $sql = "SELECT * FROM actividades INNER JOIN alumno ON alumno.nickname = '".$alumno."'
           WHERE actividades.grupo_fk = alumno.grupo_fk AND actividades.status = '200'
-          ORDER BY id DESC LIMIT ".$inicio.", ".$limite."";
+          ORDER BY actividades.id DESC LIMIT ".$inicio.", ".$limite."";
 
   /*$sql2 = "SELECT materia.nombre, tareas.materia, alumno.nickname FROM materia, tareas, alumno
            WHERE materia.id = tareas.materia AND status = '200' AND alumno.nickname = '".$alumno."'

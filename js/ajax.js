@@ -321,7 +321,6 @@ $(document).ready(function(){
     });
   });
 });
-
 $(document).ready(function(){
   $('#recuperarPassDoc').on("submit", function(event){
   event.preventDefault();
@@ -339,7 +338,6 @@ $(document).ready(function(){
     });
   });
 });
-
 $(document).ready(function(){
   $('#recuperarPassAlumno').on("submit", function(event){
   event.preventDefault();

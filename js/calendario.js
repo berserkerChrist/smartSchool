@@ -25,7 +25,7 @@ $(document).ready(function() {
        data:{titulo:title, inicio:start, fin:end},
        success:function(){
         calendar.fullCalendar('refetchEvents');
-        alert("Added Successfully");
+        alert("Evento añadido con exito");
        }
       })
      }
@@ -43,7 +43,7 @@ $(document).ready(function() {
       data:{titulo:title, inicio:start, fin:end, id:id},
       success:function(){
        calendar.fullCalendar('refetchEvents');
-       alert('Event Update');
+       alert('Actualizar evento');
       }
      })
     },
@@ -59,7 +59,7 @@ $(document).ready(function() {
       data:{titulo:title, inicio:start, fin:end, id:id},
       success:function(){
        calendar.fullCalendar('refetchEvents');
-       alert("Event Updated");
+       alert("Evento actualizado");
       }
      });
     },
@@ -73,7 +73,7 @@ $(document).ready(function() {
        data:{id:id},
        success:function(){
         calendar.fullCalendar('refetchEvents');
-        alert("Event Removed");
+        alert("Evento eliminado");
        }
       })
      }

@@ -7,7 +7,8 @@
   $grupo = $_SESSION['grupoDocente'];
 
   $sql = "SELECT * FROM tareas INNER JOIN materia ON tareas.materia = materia.id
-  WHERE tareas.grupo = '".$grupo."' AND tareas.status = '200' ORDER BY tareas.id DESC LIMIT ".$inicio.", ".$limite."";
+  WHERE tareas.grupo = '".$grupo."' AND tareas.status = '200'
+  ORDER BY tareas.id DESC LIMIT ".$inicio.", ".$limite."";
 
   //$sql2 = "SELECT materia.nombre, tareas.materia FROM materia, tareas WHERE materia.id = tareas.materia AND status = '200'";
 
