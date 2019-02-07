@@ -124,7 +124,7 @@
         </nav>
 
         <div id="actRealizadas" class="espacioTop paddingSides">
-
+          <div id="hint" class="alert alert-info" role="alert">
             <strong>En esta seccion puedes echar un vistazo a las actividades que has realizado con tu grupo</strong>
           </div>
           <br>
@@ -134,7 +134,7 @@
         </div>
 
         <div id="tareasAsignadas" class="espacioTop paddingSides none">
-
+          <div id="hintTareas" class="alert alert-info" role="alert">
             <strong>En esta seccion puedes echar un vistazo a las tareas que has asignado a tu grupo</strong>
           </div>
           <br>
@@ -144,7 +144,7 @@
         </div>
 
         <div id="tareasArchivo" class="espacioTop paddingSides none">
-
+          <div id="hintTareas" class="alert alert-info" role="alert">
             <strong>En esta seccion puedes echar un vistazo a las tareas que has asignado a tu grupo</strong>
           </div>
           <br>

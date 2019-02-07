@@ -911,10 +911,6 @@ $(document).ready(function() {
       },
       cache: false,
       success: function(data) {
-        setTimeout(function(){
-          $('#hint').fadeOut("slow");
-        }, 5000);
-        $('#hint').show();
         $('#mostrarActividadesDocente').append(data);
         if (data == '') {
           $('#cargandoActDocente').html("<button type='button' class='btn btn-info'>No hay más actividades :D</button>");
@@ -961,10 +957,6 @@ $(document).ready(function() {
       },
       cache: false,
       success: function(data) {
-        setTimeout(function(){
-          $('#hintTareas').fadeOut("slow");
-        }, 5000);
-        $('#hint').show();
         $('#mostrarTareasDoc').append(data);
         if (data == '') {
           $('#cargandoDoc').html("<button type='button' class='btn btn-info'>No hay más tareas :D</button>");
@@ -1011,10 +1003,6 @@ $(document).ready(function() {
       },
       cache: false,
       success: function(data) {
-        setTimeout(function(){
-          $('#hintTareas').fadeOut("slow");
-        }, 5000);
-        $('#hint').show();
         $('#mostrarTareasDocArchivo').append(data);
         if (data == '') {
           $('#cargandoDocArchivo').html("<button type='button' class='btn btn-info'>No hay más tareas :D</button>");
