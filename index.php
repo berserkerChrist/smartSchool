@@ -55,7 +55,7 @@
         <div class="col-sm-6 d-flex align-items-center my-auto">
           <header class="intro-wrap text-white">
             <h2 class="display-3">Smart School </h2>
-            <p class="lead text-white">Con SmartSchool puedes mantenerte al tanto del rendimineto escolar de tus hijos desde la comodidad de tu hogar</p>
+            <p class="lead text-white">Con SmartSchool puedes mantenerte al tanto del rendimiento escolar de tus hijos desde la comodidad de tu hogar</p>
             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalRegistro">Registrarme</a>
             <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalInicio">Iniciar sesion</a>
           </header>
