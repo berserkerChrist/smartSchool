@@ -124,9 +124,7 @@
         </nav>
 
         <div id="actRealizadas" class="espacioTop paddingSides">
-          <div id="hint" class="alert alert-info" role="alert">
-            <strong>En esta seccion puedes echar un vistazo a las actividades que has realizado con tu grupo</strong>
-          </div>
+          
           <br>
           <div id="mostrarActividadesDocente"></div>
           <div id="cargandoActDocente" class="text-center"></div>
@@ -134,9 +132,7 @@
         </div>
 
         <div id="tareasAsignadas" class="espacioTop paddingSides none">
-          <div id="hintTareas" class="alert alert-info" role="alert">
-            <strong>En esta seccion puedes echar un vistazo a las tareas que has asignado a tu grupo</strong>
-          </div>
+
           <br>
           <div id="mostrarTareasDoc"></div>
           <div id="cargandoDoc" class="text-center"></div>
@@ -144,9 +140,7 @@
         </div>
 
         <div id="tareasArchivo" class="espacioTop paddingSides none">
-          <div id="hintTareas" class="alert alert-info" role="alert">
-            <strong>En esta seccion puedes echar un vistazo a las tareas que has asignado a tu grupo</strong>
-          </div>
+
           <br>
           <div id="mostrarTareasDocArchivo"></div>
           <div id="cargandoDocArchivo" class="text-center"></div>
