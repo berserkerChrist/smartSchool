@@ -13,17 +13,8 @@
           WHERE tareas.grupo = alumno.grupo_fk AND tareas.status = '200'
           ORDER BY tareas.id DESC LIMIT ".$inicio.", ".$limite."";
 
-  /*$sql2 = "SELECT * FROM tareas INNER JOIN alumno ON alumno.nickname = '".$alumno."'
-          WHERE tareas.grupo = alumno.grupo_fk AND tareas.status = '200'
-          ORDER BY id DESC LIMIT ".$inicio.", ".$limite."";*/
-
-
   $resultado = mysqli_query($con, $sql);
-  //$resultado2 = mysqli_query($con, $sql2);
-
-
   while ($fila = mysqli_fetch_array($resultado)) {
-    //$fila2 = mysqli_fetch_array($resultado2);
     echo'
             <div class="card w-100 mx-auto shadow">
               <div class="card-body">

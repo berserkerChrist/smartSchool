@@ -33,7 +33,16 @@ $(document).ready(function(){
 
           var barchart = new Chart(graficaPromedios, {
               type: 'bar',
-              data: datosGrafica
+              data: datosGrafica,
+              options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
           });
 
         }
